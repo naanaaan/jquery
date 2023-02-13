@@ -1,0 +1,18 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+    $(() => {
+        console.log($('a').attr('href'))//attribute 리턴값이 collection인데 첫번재 e를 일겅옴 a2개 다있음
+        //읽을때 read할때는 퍼스트 elem만 읽어옴 작업할땐 아님
+        $('a').attr('href', 'https://www.daum.net/')
+       
+        $('a').attr({
+            href: 'https://jquery.com',
+            target: '_blank'
+        })
+
+        $('a').removeAttr('target')
+    })
+</script>
+
+<a href='https://www.google.co.kr'>google</a>
+<a href='https://www.naver.com'>naver</a>

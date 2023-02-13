@@ -1,0 +1,15 @@
+<!-- cdn링크 -->
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+    //dom object파라미터를 jQuery object로 리턴함왜냐 객체.~자바스크립트 라이브러리밖에못쓰지만 
+    // 이렇게 전환하면 jQuery라이브러리를 사용가능하기떄문
+    //dom이다준비되기까지기다림 ready는필수이며 파리미터는 하고 싶은 작업
+    jQuery(document).ready(() => $('body').append('<p>one</p>'))
+
+    $(document).ready(() => $('body').append('<p>two</p>'))
+
+    let readyFn = () => $('body').append('<p>three</p>')
+    $(document).ready(readyFn)
+
+    $(() => $('body').append('<p>four</p>'))// $()이렇게해도 알아먹음
+</script>
