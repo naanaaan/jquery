@@ -1,0 +1,15 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+let msg = 'div.foo가 '
+$(() => {
+    // if($('div.foo').length == 0) msg = 'div.foo가 없다'
+    // else msg = 'div.foo가 있다'
+    // div.foo가 없다라고 떠야함
+    // if($('div.foo').length) msg += '있다.'
+    // else msg += '없다.'
+    msg += $('div.foo').length ? '있따.' : '없다.'
+    console.log(msg)
+})
+</script>
+
+<div class='foo1'></div>
