@@ -1,0 +1,16 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('body').data('foo', 10)//쓰기
+    $('body').data('bar', {isMaual: true})
+    $('body').data({
+        baz: [1, 2],
+        hoi: 'hello'
+    })
+    console.log($('body').data('foo'))//읽기
+    console.log($('body').data('bar'))
+
+    console.log($('body').data())
+})
+</script>
+

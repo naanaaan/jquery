@@ -1,0 +1,19 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {//global object는 window
+    let $div1 = $('div')
+    let $div2 = $div1.eq(0)//jquery object
+    let div3 = $div1.get(0)//dom
+    //collection에는 원소를 만드는게 아니라 주소를 불러오는것
+    console.log($div1, $div2, div3)
+    console.log(typeof $div1, typeof $div2, typeof div3)
+     
+    let $div11 = $('div')
+    let $div22 = $div11.eq(0)
+    let div33 = $div11.get(0)
+    console.log($div1 = $div11, $div2 == $div22, div3 == div33)
+    
+})
+</script>
+
+<div></div>

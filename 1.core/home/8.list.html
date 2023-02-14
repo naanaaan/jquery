@@ -1,0 +1,30 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    // for(let i=0; i < 10; i++){
+    //     $('ul').append('<li>').find('li').eq(i).html(`item ${i}`)     
+    // }
+    /* 이렇게하면 appendTo 10번쓰는거라 비효율적 비용이 비싸다
+    for(let i=0; i < 10; i++){
+      $(`<li>item ${i}</li>`).appendTo('ul')
+    }
+    */
+    let items = []
+    for(let i = 0; i < 10; i++)
+    items.push(`<li>item ${i}</li>`)
+
+    $(items.join('')).appendTo('ul')
+    console.log(items.join(''))
+})
+</script>
+
+<ul></ul>
+
+<!--
+    <ul>
+        <li>item 0<li>
+        <li>item 1<li>
+        ...
+        <li>item 9<li>
+    </ul>
+-->

@@ -2,19 +2,19 @@
 <script>
 $(() => {
     console.log($('h1').html())
-
+    
     $('footer').html('<mark>foot</mark>')
     console.log($('footer').html())
-    
-    console.log($('header').find('h1').eq(1).html())
+
+    console.log(typeof $('header').find('h1').eq(1).html())
     $('header').find('h1').eq(1).html('<hr>')
-//주어의 컬렉션리턴 end
+
     $('ul').find('li').eq(2).html('index: 2').end()
-        .eq(3).html('index: 3').end()
-        .eq(4).html('index: 4')
-// text는 모든 element의 텍스트를 가져와서 하나의 String을 만듬
+    .eq(3).html('index: 3').end()
+    .eq(4).html('index: 4')
+
     $('h1').text('Hi')
-    console.log($('h1').text())
+    console.log($('hi').text())
 })
 </script>
 

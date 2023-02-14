@@ -1,0 +1,28 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => { //Dom obeject를 리턴
+    $('li').each((i, e) => console.log(i, e))//index element
+
+    // 과제:
+    $('li').each((i, e) => console.log(i, e.id))
+    /*
+    0 'a'
+    1 'b'
+    2 'c'
+    */
+//    let object = $('li').get(0) dom object
+//    console.log(object.id)
+// utility method 요건 array대상으로 작업
+    jQuery.each([1, 2, 3, 4], (i, e) => console.log(`[${i}]: `, e))
+
+    $.each($('li').toArray(), (i, e) => console.log(i, e))
+
+    $.each({userName: 'adelia', age: 20}, (k, v) => console.log(k, v))
+})
+</script>
+
+<ul>
+    <li id='a'>A</li>
+    <li id='b'>B</li>
+    <li id='c'>C</li>
+</ul>
