@@ -1,0 +1,14 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    $('button').click(() => {
+
+        if($(':text').val()) $('form').submit()
+    })
+})
+</script>
+
+<form>
+    <input type='text' name='userName' placeholder='사용자명'><span></span><br>
+    <button type='button'>submit</button>
+</form>

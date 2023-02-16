@@ -1,0 +1,14 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {//이벤트 객체의 keycode 13은 엔터
+    $(':password').keydown(e => {
+        if(e.keycode == 13) $('form').submit()
+    })
+})
+</script>
+
+<form>
+    <input type='text' name='userId'/>
+    <input type='password' name='pw'/>
+    <input type='submit'/>
+</form>

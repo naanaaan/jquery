@@ -1,0 +1,27 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    let ids = $('li').map((i, e) => e.id)
+    console.log(ids)
+
+    let idStr = ids.toArray().join('')
+    console.log(idStr)
+
+    console.log(ids.get())
+    ids = $.map(ids.get(), (e, i) => e + 1)
+    console.log(ids)
+
+    let arr = $.map({
+        userName: 'ss',
+        age: 20,
+        location : 'seoul'
+    }, (k, v) => v)
+    console.log(arr.join())
+})
+</script>
+
+<ul>
+    <li id='a'>A</li>
+    <li id='b'>B</li>
+    <li id='c'>C</li>
+</ul>

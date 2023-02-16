@@ -1,0 +1,11 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script> //prevent는 <a>와같이 자동으로 적용되어있는 handler을 막고 다른 handler쓸려고 쓰는 것
+$(() => {//e는 event객체
+    $('a').click(e =>{
+        e.preventDefault()
+        $('body').append('<p>prevent default handler.</p>')
+    })
+})
+</script>
+
+<a href='http://jquery.com'>jquery</a>

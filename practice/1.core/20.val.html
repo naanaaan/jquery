@@ -1,22 +1,21 @@
 <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 <script>
 $(() => {
-    //과제: text 변수에 <input type= 'text'>를 찾아서 할당하라.
     let text = $(':text')
     console.log(text)
     console.log('|' + text.val() + '|')
 
     text.val(' world ')
-    // 과제: text 의 value를, trim해서 text 객체에 저장하라.
+
     let textVal = text.val().trim()
     text.val(textVal)
 
     text.val((i, v) => `hello ${v}`)
-    //value값바뀌면서 체크되는게 달라짐
+    
     $('input').val(['noon', 'sea', 'banana'])
     $('#fruit').val('banana')
-    $('#greens').val(['cucumber', 'carrot'])
-    
+    $('#greens').val(['cucumer', 'carrot'])
+
 })
 </script>
 

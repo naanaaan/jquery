@@ -1,0 +1,22 @@
+<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+<script>
+$(() => {
+    //과제 전화번호 하이폰을 없애고 val값을 지정하라.
+    // let tel = $('input').val().replaceAll('-', '')
+    // $('input').val(`${tel}`)
+    // let phoneNum = $('input').val()
+    // let refinedPhoneNum = ''
+    // for(let char of phoneNum)
+    //     if('0' <= char && char <= '9')
+    //         refinedPhoneNum += char
+    // $('input').val(refinedPhoneNum)
+
+    $('input').val($('input').val().split('-').join(''))
+
+    $('input').val($('input').val().replace(/-/g, ''))
+})
+</script>
+
+<form>
+    <input type='tel' value='010-1234-5678'/>
+</form>
