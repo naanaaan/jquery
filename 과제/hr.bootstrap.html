@@ -10,15 +10,18 @@
 <title>선정관.hr.bootstrap</title>
 <script>
     $(() => {
-        let laborerId = 0;
-        let tr_length = $('tbody tr').length
-        let td_length = $('tbody tr:eq(0) td').length
+        let laborerId = 1;
         let laborerName, hiredDate
-   
+        let laborerModal = $('#laborerModal')
+        let modalMsg = $('#laborerModal p')
+
+        $('#yes_btn').hide()
+        $('#no_btn').hide()
+        $('#check_btn').show()
 
         let addLaborer = (laborerName, hiredDate) => {
-            $('tbody').append(
-                `<tr>
+            $('tbody').prepend(
+                `<tr id='${laborerId}'>
                     <td><input type="radio" name="list" id="${laborerId}"></td>
                     <td class='td_laborerId'>${laborerId++}</td>
                     <td class='td_laborerName'>${laborerName}</td>
@@ -27,34 +30,102 @@
         }
 
         let fixLaborer = (laborerName, hiredDate) => {
-            $('tr input[name=list]:checked').parent().siblings('.td_laborerName').text(laborerName)
-            $('tr input[name=list]:checked').parent().siblings('.td_hiredDate').text(hiredDate)
-        
+            $('tr input[name=list]:checked').parent()
+            .siblings('.td_laborerName').text(laborerName)
+
+            $('tr input[name=list]:checked').parent()
+            .siblings('.td_hiredDate').text(hiredDate)
         }
 
         let delLaborer = () => {
-            $('tr input[name=list]:checked').parentsUntil('tbody').remove('tr')
+            $('#yes_btn').show()
+            $('#no_btn').show()
+            $('#check_btn').hide()
+            modalMsg.text('노동자를 삭제하시겠습니까?.')
+            $('#laborerModal').modal('show')
+
+            $('#yes_btn').click(() =>{
+                $('tr input[name=list]:checked').parentsUntil('tbody').remove('tr')
+
+                if($('tbody tr').length == 0)  $('#noneMsg').show()
+
+                $('#yes_btn').hide()
+                $('#no_btn').hide()
+                $('#check_btn').show()
+            })
+        }
+
+        let clearVal = () => {
+            $('#laborerName_form').val('')
+            $('#hiredDate_form').val('')
         }
 
         $('#add_btn').click(() => {
             laborerName =  $('#laborerName_form').val()
             hiredDate = $('#hiredDate_form').val()
-            if((laborerName && hiredDate)) addLaborer(laborerName, hiredDate)  
-            else $('#exceptionModal').modal('show')
+
+            if (!hiredDate && laborerName) {
+                modalMsg.text('입사일을 입력하세요.')
+                laborerModal.modal('show')
+            }
+            else if (!laborerName && hiredDate) {
+                modalMsg.text('노동자명을 입력하세요.')
+                laborerModal.modal('show')
+            }
+            else if (!(laborerName && hiredDate)) {
+                modalMsg.text('노동자명과 입사일을 입력하세요')
+                laborerModal.modal('show')
+            }
+            else {
+                $('#noneMsg').hide()
+                addLaborer(laborerName, hiredDate)
+                clearVal()
+            }
         })
 
         $('#fix_btn').click(() => {
             laborerName =  $('#laborerName_form').val()
             hiredDate = $('#hiredDate_form').val()
-            if(!($('tr input[name=list]:checked').val()) && (laborerName && hiredDate)) $('#exceptionModal2').modal('show')
-            if((laborerName && hiredDate))  fixLaborer(laborerName, hiredDate)
-            else $('#exceptionModal').modal('show')
+
+            if($('tbody tr').length == 0){
+                modalMsg.text('노동자가 없습니다.')
+                laborerModal.modal('show')
+            }
+            else if (!hiredDate && laborerName) {
+                modalMsg.text('입사일을 입력하세요.')
+                laborerModal.modal('show')
+            }
+            else if (!laborerName && hiredDate) {
+                modalMsg.text('노동자명을 입력하세요.')
+                laborerModal.modal('show')
+            }
+            else if (!(laborerName && hiredDate)) {
+                modalMsg.text('노동자명과 입사일을 입력하세요')
+                laborerModal.modal('show')
+            }
+            else if(!($('tr input[name=list]:checked').val())){
+                modalMsg.text('노동자를 체크하세요.')
+                laborerModal.modal('show')
+            }else {
+                fixLaborer(laborerName, hiredDate)
+                clearVal()
+            }
         })
 
         $('#del_btn').click(() => {
-            delLaborer()
+            laborerName =  $('#laborerName_form').val()
+            hiredDate = $('#hiredDate_form').val()
+
+            if($('tbody tr').length == 0){
+                modalMsg.text('노동자가 없습니다.')
+                laborerModal.modal('show')
+            }
+            else if(!($('tr input[name=list]:checked').val())){
+                modalMsg.text('노동자를 체크하세요.')
+                laborerModal.modal('show')
+            }
+            else delLaborer()
         })
-        console.log($('tr input[name=list]:checked').val())
     })
     </script>
 </head>
@@ -95,7 +166,7 @@
                         <i class='bi bi-check-circle'></i>
                         <span class='d-none d-md-inline'>수정</span>
                     </div>
-                    <div class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#delLaborerModal'>
+                    <div id='del_btn' class='btn btn-danger' >
                         <i class='bi bi-x-circle'></i>
                         <span class='d-none d-md-inline'>삭제</span>
                     </div>
@@ -117,60 +188,28 @@
                 </tr>
             </thead>
             <tbody>
-
+                
             </tbody>
         </table>
+        <p id='noneMsg' class ='text-center'>노동자가 없습니다.</p>
     </div>
 </div>
 </div>
 
-<div class='modal fade' id='delLaborerModal'>
+<div class='modal fade' id="laborerModal">
     <div class='modal-dialog'>
         <div class='modal-content'>
             <div class='modal-header'>
                 <div class='btn-close btn-sm' data-bs-dismiss='modal'></div>
             </div>
             <div class='modal-body'>
-                <p>노동자를 삭제하시겠습니까?</p>
+                <p></p>
             </div>
             <div class='modal-footer'>
-                <div class='btn btn-secondary' data-bs-dismiss='modal'>아니오</div>
-                <div id='del_btn' class='btn btn-primary' data-bs-dismiss='modal'>예</div>
+                <div id='check_btn' class='btn btn-primary' data-bs-dismiss='modal'>확인</div>
+                <div id='no_btn' class='btn btn-secondary' data-bs-dismiss='modal'>아니오</div>
+                <div id='yes_btn' class='btn btn-primary' data-bs-dismiss='modal'>예</div>
             </div>
         </div>
     </div>
 </div>
-
-<div class='modal fade' id="exceptionModal">
-    <div class='modal-dialog'>
-        <div class='modal-content'>
-            <div class='modal-header'>
-                <div class='btn-close btn-sm' data-bs-dismiss='modal'></div>
-            </div>
-            <div class='modal-body'>
-                <p>노동자명 또는 입사일을 입력하지 않았습니다.</p>
-            </div>
-            <div class='modal-footer'>
-                <div class='btn btn-primary' data-bs-dismiss='modal'>확인</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class='modal fade' id="exceptionModal2">
-    <div class='modal-dialog'>
-        <div class='modal-content'>
-            <div class='modal-header'>
-                <div class='btn-close btn-sm' data-bs-dismiss='modal'></div>
-            </div>
-            <div class='modal-body'>
-                <p>수정 또는 삭제할 노동자를 체크해주세요.</p>
-            </div>
-            <div class='modal-footer'>
-                <div class='btn btn-primary' data-bs-dismiss='modal'>확인</div>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
